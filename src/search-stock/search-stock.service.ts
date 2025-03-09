@@ -162,10 +162,14 @@ export class SearchStockService {
     return '';
   }
 
-  public async getCategory() {
+  public async getCategory(): Promise<IBaseResponse> {
     const productsType = await this.getProductType()
-    const category = productsType.productList
-    return category
+    const responseData: IBaseResponse = {
+      responseStatus: 200,
+      responseMessage: 'Success',
+      data: productsType.productList
+    }
+    return responseData
   }
 
   private async filterByDate(data: ITransaction[], startDate: string, endDate: string): Promise<ITransaction[]> {
